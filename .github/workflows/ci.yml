@@ -23,3 +23,5 @@ jobs:
         run: node test/connect-e2e.mjs
       - name: iCalendar format test
         run: node test/ics.mjs
+      - name: Cost summary and prompt test
+        run: node test/costs.mjs

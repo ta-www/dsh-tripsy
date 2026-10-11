@@ -46,6 +46,14 @@ dsh plugin --profile web add github:ta-www/dsh-tripsy
 
 Refresh the page. **Tripsy** appears in the sidebar. The first time, click **登录 Tripsy / Sign in** — the browser opens once for the OAuth handshake, and the token then refreshes itself indefinitely.
 
+## Trip costs, completed by the agent
+
+Tripsy's own expense reporting needs a paid plan, so the panel works from the prices already attached to activities, lodgings and transports. The **费用概览** card in each trip sums what has a price, and **AI 计算费用** hands the agent an instruction that completes it.
+
+The split is deliberate. Summing prices is arithmetic, so it happens on the host, exactly, once, and is tested. Estimating what has *no* price is judgement, so it goes to the agent — with the real numbers attached, and told to adopt them rather than re-estimate, to say when it is unsure instead of inventing precision, and never to assume an exchange rate. Multi-currency sums are reported per currency and never silently added together.
+
+The prompt also states that the trip must not be modified: this is a report, not a write.
+
 ## Export to your calendar (.ics)
 
 Each trip has **导出到日历 / Export to calendar** next to its name, and a **教程 / Guide** button that opens the import steps right there — the two halves of "get this onto my phone" are useless apart.
