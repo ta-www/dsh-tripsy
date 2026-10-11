@@ -40,6 +40,10 @@
     "itinerary",
     "mcp"
   ],
+  "peerDependencies": {
+    "@deepseek-ai/dsh": ">=0.2.0-rc.2",
+    "react": "^18.2.0"
+  },
   "license": "MIT",
   "author": "ta-www",
   "repository": {
