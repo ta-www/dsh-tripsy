@@ -69,6 +69,30 @@ await check('从粘贴的 URL 发现授权服务器与端点', async () => {
   assert.ok(e.registration, 'registration endpoint should be discovered');
 });
 
+await check('自动打开浏览器时不经过 shell（否则 & 会截断授权地址）', async () => {
+  const { browserCommand } = await import('../lib/index.js');
+  // A real authorize URL always carries several `&`-separated parameters; a
+  // shell would split it at the first one and drop client_id.
+  const url =
+    'https://my.tripsy.app/o/authorize/?response_type=code&client_id=abc123&state=xyz&code_challenge=q';
+  for (const platform of ['win32', 'darwin', 'linux']) {
+    const { cmd, args } = browserCommand(url, platform);
+    assert.ok(
+      !/^(cmd|cmd\.exe|powershell|powershell\.exe|sh|bash)$/i.test(cmd),
+      platform + ' must not open the browser through a shell, got ' + cmd,
+    );
+    assert.ok(
+      args.includes(url),
+      platform + ' must pass the URL as one argument, got ' + JSON.stringify(args),
+    );
+    assert.equal(
+      args.filter((a) => a.includes('client_id')).length,
+      1,
+      platform + ' must pass client_id exactly once',
+    );
+  }
+});
+
 await check('粘贴 URL 后完成注册、PKCE 授权并拿到令牌', async () => {
   const endpoints = await discoverEndpoints(MCP_URL);
   const status = await api.startLogin({
