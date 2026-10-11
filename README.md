@@ -8,20 +8,26 @@ Browse your **[Tripsy](https://tripsy.app)** trips inside a DeepSeek Harness pan
 
 ## What it does
 
-A sidebar entry and a center-column page. Pick a trip on the left, read its day-by-day detail on the right.
+A sidebar entry and a center-column page with two tabs.
 
-**It is read-only on purpose.** Trips, activities and bookings are created by *asking the agent* — the same Tripsy account is already exposed to the model through the Tripsy MCP tools, so "add a restaurant in Manhattan on the 5th" works from the chat, with the agent confirming what it is about to change. A panel that can silently delete a booking is not worth the convenience.
+**行程浏览 / Browse** — pick a trip on the left. The right side shows a cover hero with the trip name, countdown, duration and date range; a day-grouped timeline with an icon per stop; and a cost card totalling each category from the items' own prices. Every time is rendered in its own IANA timezone.
+
+**AI 管理 / Manage** — describe the change you want in plain language. The tab composes a precise instruction for the selected trip (id, dates and timezone included) and hands it to the DSH composer, so the agent does the work with the Tripsy MCP tools and you see every step. The panel itself never writes to your account: creating and editing stay in the conversation, where the agent confirms what it is about to change.
+
+**Your account details never reach the browser.** `/api/dsh-tripsy/health` returns only the auth summary and the account currency — not the name, e-mail or avatar the Tripsy profile carries.
 
 ```
 ┌ Tripsy ─────────────────────────────────┐
-│ New York City · 2026-10-11 → 10-17      │
+│ 行程浏览 │ AI 管理                       │
 ├──────────────┬──────────────────────────┤
-│ New York City│  [cover]                 │
-│              │  New York City           │
-│              │  活动 27                 │
-│              │  Oct 12, 09:00  The Met  │
-│              │  Oct 12, 13:00  Katz's   │
-│              │  住宿 1 · 交通 7 · 费用 0 │
+│ New York City│  ╔══════════════════════╗ │
+│ 2026-10-11   │  ║  cover  +  NYC       ║ │
+│              │  ╚══════════════════════╝ │
+│              │  ＋   ✈️   🛏️   💳        │
+│              │  10月11日 星期日          │
+│              │  ● ✈️ LAX → JFK   05:57  │
+│              │  │ 🚗 驾车到酒店   15:00  │
+│              │  ● 🏨 Aman        16:00  │
 └──────────────┴──────────────────────────┘
 ```
 
