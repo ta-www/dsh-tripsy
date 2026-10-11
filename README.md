@@ -15,7 +15,7 @@ A sidebar entry and a center-column page.
 **Pick a trip** and it opens with two modules inside it:
 
 - **行程浏览 / Browse** — a cover hero with the trip name, countdown, duration and date range; a day-grouped timeline with an icon per stop; and a cost card totalling each category from the items' own prices. Every time is rendered in its own IANA timezone.
-- **AI 管理 / Manage** — describe the change you want. The panel composes a precise instruction for that trip (id, dates and timezone included) and hands it to the DSH composer, so the agent does the work with the Tripsy MCP tools and you see every step. Neither module writes to your account directly.
+- **AI 管理 / Manage** — describe the change you want, then press one button. The panel composes a precise instruction for that trip (id, dates and timezone included) and **sends it straight to the conversation**, so the agent starts working immediately and you watch every step. There is no prompt text to read and nothing to paste. If no conversation is open yet, the panel says so up front and the button falls back to copying the instruction.
 
 **Your account details never reach the browser.** `/api/dsh-tripsy/health` returns only the auth summary and the account currency — not the name, e-mail or avatar the Tripsy profile carries.
 
