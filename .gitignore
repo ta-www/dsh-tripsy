@@ -1,4 +1,5 @@
 node_modules/
 auth.json
+test/auth.*.json
 *.log
 *.zip
