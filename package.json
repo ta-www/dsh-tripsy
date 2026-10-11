@@ -58,6 +58,8 @@
     "node": ">=20"
   },
   "scripts": {
-    "test": "node test/connect-e2e.mjs"
+    "test": "node test/connect-e2e.mjs && node test/ics.mjs",
+    "test:connect": "node test/connect-e2e.mjs",
+    "test:ics": "node test/ics.mjs"
   }
 }

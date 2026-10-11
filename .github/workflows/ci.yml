@@ -21,3 +21,5 @@ jobs:
       # (real PKCE, real Streamable HTTP MCP endpoint), so no account is needed.
       - name: Connect-flow end-to-end test
         run: node test/connect-e2e.mjs
+      - name: iCalendar format test
+        run: node test/ics.mjs

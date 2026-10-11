@@ -46,6 +46,20 @@ dsh plugin --profile web add github:ta-www/dsh-tripsy
 
 Refresh the page. **Tripsy** appears in the sidebar. The first time, click **登录 Tripsy / Sign in** — the browser opens once for the OAuth handshake, and the token then refreshes itself indefinitely.
 
+## Export to your calendar (.ics)
+
+Each trip has **导出到日历 / Export to calendar** next to its name, and a **教程 / Guide** button that opens the import steps right there — the two halves of "get this onto my phone" are useless apart.
+
+`GET /api/dsh-tripsy/ics?id=<tripId>` returns a `text/calendar` file:
+
+- the trip itself as one all-day event, with the end date written exclusively (+1 day) so the last day is not lost
+- every activity, lodging and transport as its own event, with `LOCATION`, `GEO`, confirmation codes, prices and notes
+- items without a start time are skipped, and the count is reported in `X-Tripsy-Skipped`
+
+**Times are absolute UTC instants, not TZID-anchored wall times.** Anchoring to a named zone is only correct when the file also carries a `VTIMEZONE` with that zone's real transitions; hand-writing those gets DST wrong and shifts events by an hour. UTC cannot be misread by any calendar and keeps flight durations truthful. The local wall time is written into each description instead, so the itinerary still reads the way the booking does.
+
+On iPhone: save the `.ics`, then hand it to a Shortcut (the community *ICS To Calendar* one, or three actions of your own: receive Files → Choose from Calendar → Add New Event) or just tap the file and let iOS ask which calendar to use.
+
 ## How it works
 
 The host half registers a small route family and reuses the same OAuth + MCP code as the [tripsy-mcp](https://github.com/ta-www/tripsy-mcp) CLI, so there is exactly one implementation of the OAuth dance and one place a token is refreshed.
