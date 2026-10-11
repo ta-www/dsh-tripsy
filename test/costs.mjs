@@ -114,7 +114,7 @@ check('提示词列出缺价格的条目并点名估算依据', () => {
   assert.ok(prompt.includes('缺少价格'));
   assert.ok(prompt.includes('城墙'));
   assert.ok(prompt.includes('依据'));
-  assert.ok(prompt.includes('不要编造精确数字'));
+  assert.ok(prompt.includes('编造精确数字'));
 });
 
 check('提示词禁止凭空假设汇率', () => {
@@ -124,8 +124,48 @@ check('提示词禁止凭空假设汇率', () => {
   assert.ok(prompt.includes('不要凭空假设汇率'));
 });
 
-check('提示词明确要求不要改动行程', () => {
-  assert.ok(costPrompt(DETAIL, S).includes('不要用工具去修改我的行程'));
+check('写入价格必须等确认，且不得改动其它条目', () => {
+  const prompt = costPrompt(DETAIL, S);
+  assert.ok(prompt.includes('等我确认后再写入'));
+  assert.ok(prompt.includes('不要改动或删除'));
+  assert.ok(prompt.includes('12306'), 'domestic rail is named as a source');
+  assert.ok(prompt.includes('大众点评'), 'domestic dining is named as a source');
+});
+
+check('给出日均与人均；多币种时不给，避免假精确', () => {
+  // 10-16 -> 10-18 inclusive is three days.
+  assert.equal(S.days, 3);
+  assert.equal(S.people, 1);
+  assert.equal(S.perDay, Math.round((818 / 3) * 100) / 100);
+  assert.equal(S.perPerson, null, 'a single traveller needs no per-person line');
+
+  const two = summarizeCosts({
+    trip: {
+      id: 9,
+      name: 'x',
+      starts_at: '2026-10-16',
+      ends_at: '2026-10-17',
+      guests: [
+        { id: 1, joined: true },
+        { id: 2, joined: true },
+      ],
+    },
+    activities: [{ id: 1, name: 'a', activity_type: 'restaurant', price: 200, currency: 'CNY' }],
+  });
+  assert.equal(two.days, 2);
+  assert.equal(two.people, 2);
+  assert.equal(two.perDay, 100);
+  assert.equal(two.perPerson, 100);
+
+  const mixed = summarizeCosts({
+    trip: { id: 10, name: 'y', starts_at: '2026-10-16', ends_at: '2026-10-17' },
+    activities: [
+      { id: 1, name: 'a', activity_type: 'restaurant', price: 100, currency: 'CNY' },
+      { id: 2, name: 'b', activity_type: 'restaurant', price: 30, currency: 'USD' },
+    ],
+  });
+  assert.equal(mixed.perDay, null, 'mixed currencies must not yield a per-day figure');
+  assert.equal(mixed.currency, null);
 });
 
 check('空行程也能生成一份可用的提示词', () => {

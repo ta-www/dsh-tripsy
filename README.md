@@ -52,7 +52,11 @@ Tripsy's own expense reporting needs a paid plan, so the panel works from the pr
 
 The split is deliberate. Summing prices is arithmetic, so it happens on the host, exactly, once, and is tested. Estimating what has *no* price is judgement, so it goes to the agent — with the real numbers attached, and told to adopt them rather than re-estimate, to say when it is unsure instead of inventing precision, and never to assume an exchange rate. Multi-currency sums are reported per currency and never silently added together.
 
-The prompt also states that the trip must not be modified: this is a report, not a write.
+The card is always rendered. Keying it on a non-empty price list hid it on exactly the trips that need it most — a real imported trip has 16 items and no prices at all.
+
+The instruction asks the agent to research each unpriced item on named platforms (大众点评 / 美团 / 抖音团购 / 小红书 domestically; Google Maps, Tripadvisor, Yelp or official pages elsewhere; 12306, 航旅纵横 or airline sites for transport), to state the source and when it was checked, and to say "couldn't find it" with a range rather than invent a precise number with a fake citation. It reports a table first and writes the prices back only once that table is confirmed, so the card then shows real totals.
+
+The prompt also states that nothing else about the trip may be added or deleted: filling in prices is the only permitted write.
 
 ## Export to your calendar (.ics)
 
