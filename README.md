@@ -8,27 +8,34 @@ Browse your **[Tripsy](https://tripsy.app)** trips inside a DeepSeek Harness pan
 
 ## What it does
 
-A sidebar entry and a center-column page with two tabs.
+A sidebar entry and a center-column page.
 
-**行程浏览 / Browse** — pick a trip on the left. The right side shows a cover hero with the trip name, countdown, duration and date range; a day-grouped timeline with an icon per stop; and a cost card totalling each category from the items' own prices. Every time is rendered in its own IANA timezone.
+**＋ New trip** sits at the top of the trip list. Describe what you want in plain language — where, how long, who with, what you like — and the panel composes a detailed instruction that the agent turns into a real itinerary: the trip itself first, then activities, lodging and transport filled in day by day.
 
-**AI 管理 / Manage** — describe the change you want in plain language. The tab composes a precise instruction for the selected trip (id, dates and timezone included) and hands it to the DSH composer, so the agent does the work with the Tripsy MCP tools and you see every step. The panel itself never writes to your account: creating and editing stay in the conversation, where the agent confirms what it is about to change.
+**Pick a trip** and it opens with two modules inside it:
+
+- **行程浏览 / Browse** — a cover hero with the trip name, countdown, duration and date range; a day-grouped timeline with an icon per stop; and a cost card totalling each category from the items' own prices. Every time is rendered in its own IANA timezone.
+- **AI 管理 / Manage** — describe the change you want. The panel composes a precise instruction for that trip (id, dates and timezone included) and hands it to the DSH composer, so the agent does the work with the Tripsy MCP tools and you see every step. Neither module writes to your account directly.
 
 **Your account details never reach the browser.** `/api/dsh-tripsy/health` returns only the auth summary and the account currency — not the name, e-mail or avatar the Tripsy profile carries.
 
 ```
 ┌ Tripsy ─────────────────────────────────┐
-│ 行程浏览 │ AI 管理                       │
-├──────────────┬──────────────────────────┤
-│ New York City│  ╔══════════════════════╗ │
-│ 2026-10-11   │  ║  cover  +  NYC       ║ │
-│              │  ╚══════════════════════╝ │
-│              │  ＋   ✈️   🛏️   💳        │
-│              │  10月11日 星期日          │
-│              │  ● ✈️ LAX → JFK   05:57  │
-│              │  │ 🚗 驾车到酒店   15:00  │
-│              │  ● 🏨 Aman        16:00  │
-└──────────────┴──────────────────────────┘
+│ ┌ ＋ 新建行程 ─────────────────────────┐ │
+│ │ 用一句话让 AI 生成行程                │ │
+│ └──────────────────────────────────────┘ │
+│ ┌──────────────────┬───────────────────┐ │
+│ │ New York City    │ 行程浏览 │ AI 管理 │ │
+│ │ 10-11 → 10-17    ├───────────────────┤ │
+│ │ 东京周末         │  ╔═════════════╗  │ │
+│ │                  │  ║    封面     ║  │ │
+│ │                  │  ╚═════════════╝  │ │
+│ │                  │  10月11日 星期日   │ │
+│ │                  │  ● ✈️ LAX → JFK   │ │
+│ │                  │  │ 🚗 驾车到酒店  │ │
+│ │                  │  ● 🏨 Aman        │ │
+│ └──────────────────┴───────────────────┘ │
+└─────────────────────────────────────────┘
 ```
 
 ## Install
