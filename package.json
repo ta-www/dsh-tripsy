@@ -1,0 +1,56 @@
+{
+  "name": "dsh-tripsy",
+  "version": "0.1.0",
+  "description": "Browse your Tripsy trips inside a DeepSeek Harness workspace panel: itinerary, activities, lodging, transport and expenses. Read-only by design -- create and edit by asking the agent, which uses the Tripsy MCP tools.",
+  "type": "module",
+  "main": "lib/index.js",
+  "icon": "icon.svg",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/**/*.js",
+    "lib/**/*.mjs",
+    "cordis.patch.yml",
+    "icon.svg",
+    "README.md",
+    "README.zh-CN.md"
+  ],
+  "dsh": {
+    "engines": {
+      "dsh": ">=0.2.0-rc.2"
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-renderer"
+      ]
+    }
+  },
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "tripsy",
+    "travel",
+    "itinerary",
+    "mcp"
+  ],
+  "license": "MIT",
+  "author": "ta-www",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ta-www/dsh-tripsy.git"
+  },
+  "homepage": "https://github.com/ta-www/dsh-tripsy#readme",
+  "bugs": {
+    "url": "https://github.com/ta-www/dsh-tripsy/issues"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

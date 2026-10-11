@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" role="img" aria-label="Tripsy">
+  <path d="M4 18.5c2.2-4.2 4.4-6.3 6.6-6.3 2.2 0 3.3 2.1 5.5 2.1 1.1 0 2.1-.5 2.9-1.5"
+        fill="none" stroke="#f97316" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="2.4 2.4"/>
+  <circle cx="4" cy="18.5" r="1.7" fill="#f97316"/>
+  <circle cx="19" cy="12.8" r="1.7" fill="#f97316"/>
+  <path d="M12 2.6c-2.6 0-4.7 2.1-4.7 4.7 0 3.4 4.7 7.4 4.7 7.4s4.7-4 4.7-7.4c0-2.6-2.1-4.7-4.7-4.7z"
+        fill="none" stroke="#f97316" stroke-width="1.8" stroke-linejoin="round"/>
+  <circle cx="12" cy="7.3" r="1.6" fill="#f97316"/>
+</svg>
