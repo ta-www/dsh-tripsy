@@ -74,7 +74,7 @@ On iPhone: save the `.ics`, then hand it to a Shortcut (the community *ICS To Ca
 
 ## How it works
 
-The host half registers a small route family and reuses the same OAuth + MCP code as the [tripsy-mcp](https://github.com/ta-www/tripsy-mcp) CLI, so there is exactly one implementation of the OAuth dance and one place a token is refreshed.
+The host half registers a small route family and carries its own OAuth 2.1 + MCP client in `lib/tripsy/`, so installing the plugin needs no separate service and there is exactly one implementation of the OAuth dance and one place a token is refreshed.
 
 | | |
 |---|---|

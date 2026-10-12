@@ -74,7 +74,7 @@ iPhone 上的做法：存下 `.ics`，交给快捷指令（社区里的 *ICS To 
 
 ## 实现方式
 
-宿主半注册一族小路由，并**复用 [tripsy-mcp](https://github.com/ta-www/tripsy-mcp) CLI 里同一份 OAuth + MCP 代码**，因此 OAuth 只有一份实现、令牌只有一处刷新。
+宿主半注册一族小路由，并**自带一份 OAuth 2.1 + MCP 客户端**（`lib/tripsy/`），因此安装插件不需要额外服务，OAuth 只有一份实现、令牌只有一处刷新。
 
 | 文件 | 作用 |
 |---|---|
